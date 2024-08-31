@@ -12,15 +12,14 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class FileDTO {
-    @NotBlank
+    @NotBlank(message = "Необходим указать названия")
     private String title;
-    @NotEmpty
+    @NotEmpty(message = "Необходим добавить файл")
     private byte[] data;
-    @NotNull
+    @NotNull(message = "Необходим указать дату отправки файла")
     private LocalDateTime date;
-    @NotBlank
+    @NotBlank(message = "Необходим добавить описание файла")
     private String description;
 
 }

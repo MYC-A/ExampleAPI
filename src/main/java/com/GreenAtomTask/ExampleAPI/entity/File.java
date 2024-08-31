@@ -1,5 +1,6 @@
 package com.GreenAtomTask.ExampleAPI.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,12 +10,10 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 @Entity
 @Table(name = "Archive")
-@Builder
 @Getter
 @Setter
-@AllArgsConstructor
 public class File {
-    public File(String title, byte[] data, LocalDateTime creationdata, String description) {
+    public File(String title, byte[] data, LocalDateTime date, String description) {
         this.title = title;
         this.data = data;
         this.date = date;
@@ -27,6 +26,7 @@ public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private int id;
 
     private String title;

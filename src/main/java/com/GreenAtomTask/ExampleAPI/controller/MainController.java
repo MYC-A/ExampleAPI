@@ -1,40 +1,47 @@
 package com.GreenAtomTask.ExampleAPI.controller;
 
 import com.GreenAtomTask.ExampleAPI.DTO.FileDTO;
+import com.GreenAtomTask.ExampleAPI.convertor.FileConvertor;
 import com.GreenAtomTask.ExampleAPI.entity.File;
 import com.GreenAtomTask.ExampleAPI.services.FileService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
 public class MainController {
     private final FileService fileService;
+    private final FileConvertor fileConvertor;
 
     @PostMapping("api/put")
-    public void putFile(@Valid @RequestBody FileDTO fileDTO){
-
-        fileService.saveFile(File.builder()
-                .title(fileDTO.getTitle())
-                .data(fileDTO.getData())
-                .date(fileDTO.getDate())
-                .description(fileDTO.getDescription()).
-                build());
+    public int putFile(@Valid @RequestBody FileDTO fileDTO){
+        return fileService.saveFile(fileConvertor.convertFromDto(fileDTO));
     }
 
     @GetMapping("/api/storage")
-    public List<File> getSortAllFiles(){
-        return fileService.getAll();
+    public List<FileDTO> getSortAllFiles(@RequestParam(defaultValue = "0") int page,
+                                      @RequestParam(defaultValue = "3") int size){
+        Pageable pageable = PageRequest.of(page, size);
+        return fileService.getAll(pageable).getContent()
+                .stream().map(fileConvertor::convertToDto)
+                .collect(Collectors.toList());
+
     }
 
+
     @GetMapping("/api/get")
-    public File getOneFile(@RequestParam int id){
-        return fileService.getFile(id);
+    public FileDTO getOneFile(@RequestParam int id){
+        return fileConvertor.convertToDto(fileService.getFile(id));
     }
     @GetMapping("/api/all")
     public String show(){

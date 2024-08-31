@@ -3,6 +3,8 @@ package com.GreenAtomTask.ExampleAPI.services;
 import com.GreenAtomTask.ExampleAPI.entity.File;
 import com.GreenAtomTask.ExampleAPI.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +19,8 @@ public class FileService {
         return file.getId();
     }
 
-    public List<File> getAll(){
-        return fileRepository.findAllByOrderByDateAsc();
+    public Page<File> getAll(Pageable pageable){
+        return fileRepository.findAllByOrderByDateAsc(pageable);
     }
 
     public File getFile(int id){
