@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class FileService {
@@ -24,7 +25,7 @@ public class FileService {
     }
 
     public File getFile(int id){
-        return fileRepository.findById(id).orElseThrow();
+        return fileRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Файла с данным id " + id + " нет"));
     }
 
 }
