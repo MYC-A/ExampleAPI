@@ -51,10 +51,7 @@ class FileServiceTest {
     void FindAllTest() {
         File firsFile = mock(File.class);
         File secondFile = mock(File.class);
-        when(firsFile.getId()).thenReturn(1);
-        when(secondFile.getId()).thenReturn(2);
-        fileService.saveFile(firsFile);
-        fileService.saveFile(secondFile);// Задаем значение для метода getId()
+
 
         List<File> files = new ArrayList<>(List.of(firsFile,secondFile));
         Pageable pageable = PageRequest.of(0, 2);

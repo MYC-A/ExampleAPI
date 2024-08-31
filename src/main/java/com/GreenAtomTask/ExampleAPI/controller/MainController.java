@@ -19,8 +19,8 @@ public class MainController {
     private final FileConvertor fileConvertor;
 
     @PostMapping("api/put")
-    public int putFile(@Valid @RequestBody FileDTO fileDTO){
-        return fileService.saveFile(fileConvertor.convertFromDto(fileDTO));
+    public String putFile(@Valid @RequestBody FileDTO fileDTO){
+        return "\"id\": " +fileService.saveFile(fileConvertor.convertFromDto(fileDTO));
     }
 
     @GetMapping("/api/storage")
