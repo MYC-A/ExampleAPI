@@ -2,14 +2,9 @@ package com.GreenAtomTask.ExampleAPI.controller;
 
 import com.GreenAtomTask.ExampleAPI.DTO.FileDTO;
 import com.GreenAtomTask.ExampleAPI.convertor.FileConvertor;
-import com.GreenAtomTask.ExampleAPI.entity.File;
 import com.GreenAtomTask.ExampleAPI.services.FileService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +27,7 @@ public class MainController {
     public List<FileDTO> getSortAllFiles(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "3") int size){
         Pageable pageable = PageRequest.of(page, size);
-        return fileService.getAll(pageable).getContent()
+        return fileService.FindAll(pageable).getContent()
                 .stream().map(fileConvertor::convertToDto)
                 .collect(Collectors.toList());
 
@@ -41,7 +36,7 @@ public class MainController {
 
     @GetMapping("/api/get")
     public FileDTO getOneFile(@RequestParam int id){
-        return fileConvertor.convertToDto(fileService.getFile(id));
+        return fileConvertor.convertToDto(fileService.FindFile(id));
     }
     @GetMapping("/api/all")
     public String show(){

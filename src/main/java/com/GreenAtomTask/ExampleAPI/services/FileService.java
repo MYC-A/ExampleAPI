@@ -7,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -20,11 +19,11 @@ public class FileService {
         return file.getId();
     }
 
-    public Page<File> getAll(Pageable pageable){
+    public Page<File> FindAll(Pageable pageable){
         return fileRepository.findAllByOrderByDateAsc(pageable);
     }
 
-    public File getFile(int id){
+    public File FindFile(int id){
         return fileRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Файла с данным id " + id + " нет"));
     }
 
