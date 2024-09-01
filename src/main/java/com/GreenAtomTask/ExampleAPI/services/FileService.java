@@ -24,7 +24,7 @@ public class FileService {
     }
 
     public File FindFile(int id){
-        return fileRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Файла с данным id " + id + " нет"));
+        return fileRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Файл с \"id\": " + id+" недоступен"));
     }
 
 }

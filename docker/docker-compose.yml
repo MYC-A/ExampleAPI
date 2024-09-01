@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  DBAPI:
+    image: postgres
+    container_name: DBAPI
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=DBAPI
+    ports:
+      - "5432:5432"
+
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: APIGreenAtom
+    ports:
+      - "8080:8080"
+    depends_on:
+      - DBAPI
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://DBAPI:5432/DBAPI"
