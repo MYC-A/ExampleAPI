@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FileRepository extends JpaRepository<File,Integer> {
-    Page<File> findAllByOrderByDateAsc(Pageable pageable);
+    Page<File> findAllByOrderByDateAsc(Pageable pageable); //Метод для сортировки
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FileConvertor {
+
+    //Класс для конвертации FileDTO и File
     private final ModelMapper modelMapper;
     public FileConvertor(){
         this.modelMapper = new ModelMapper();

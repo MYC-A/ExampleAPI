@@ -5,7 +5,9 @@ import com.GreenAtomTask.ExampleAPI.repository.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.NoSuchElementException;
 
@@ -23,8 +25,8 @@ public class FileService {
         return fileRepository.findAllByOrderByDateAsc(pageable);
     }
 
-    public File FindFile(int id){
-        return fileRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Файл с \"id\": " + id+" недоступен"));
+    public File FindFile(int id){ //Обрабатываем исключение в классе GlobalExceptionHandler
+        return fileRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Файл с id = %d не существует",id)));
     }
 
 }

@@ -1,5 +1,6 @@
 package com.GreenAtomTask.ExampleAPI.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,13 +12,15 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class FileDTO {
-    @NotBlank(message = "Необходим указать названия")
+    //Класс для скрытия внутриней информации от пользователей
+    @NotBlank(message = "Необходимо указать название")
     private String title;
-    @NotEmpty(message = "Необходим добавить файл")
+    @NotEmpty(message = "Необходимо добавить файл")
     private byte[] data;
-    @NotNull(message = "Необходим указать дату отправки файла")
+    @JsonProperty("creation_date")
+    @NotNull(message = "Необходимо указать дату отправки файла")
     private LocalDateTime date;
-    @NotBlank(message = "Необходим добавить описание файла")
+    @NotBlank(message = "Необходимо добавить описание файла")
     private String description;
 
 }

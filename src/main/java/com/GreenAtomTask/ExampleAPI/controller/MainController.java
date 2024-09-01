@@ -26,7 +26,7 @@ public class MainController {
     @GetMapping("/api/storage")
     public List<FileDTO> getSortAllFiles(@RequestParam(defaultValue = "0") int page,
                                       @RequestParam(defaultValue = "3") int size){
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(page, size); //
         return fileService.FindAll(pageable).getContent()
                 .stream().map(fileConvertor::convertToDto)
                 .collect(Collectors.toList());
@@ -37,9 +37,5 @@ public class MainController {
     @GetMapping("/api/get")
     public FileDTO getOneFile(@RequestParam int id){
         return fileConvertor.convertToDto(fileService.FindFile(id));
-    }
-    @GetMapping("/api/all")
-    public String show(){
-        return "Hello World";
     }
 }

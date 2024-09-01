@@ -8,6 +8,8 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=DBAPI
+    volumes:
+      - pg_example:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
@@ -22,3 +24,5 @@ services:
       - DBAPI
     environment:
       SPRING_DATASOURCE_URL: "jdbc:postgresql://DBAPI:5432/DBAPI"
+volumes:
+  pg_example:
