@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,7 +62,7 @@ class FileServiceTest {
         Page<File> result = fileService.FindAll(pageable);
 
         assertEquals(page, result);
-        verify(fileRepository, times(1)).findAllByOrderByDateAsc(pageable); //
+        verify(fileRepository, times(1)).findAllByOrderByDateAsc(pageable);
     }
 
 

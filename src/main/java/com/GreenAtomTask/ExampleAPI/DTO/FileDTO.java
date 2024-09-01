@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class FileDTO {
-    //Класс для скрытия внутриней информации от пользователей
+    //Класс для скрытия внутренней информации от пользователей
     @NotBlank(message = "Необходимо указать название")
     private String title;
     @NotEmpty(message = "Необходимо добавить файл")
